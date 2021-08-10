@@ -1,14 +1,18 @@
 package com.example.springboot_exercise_401;
 
 
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -24,6 +28,9 @@ public class HomeController {
 
     @Autowired
     PetRepository petRepository;
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
 
     @RequestMapping("/")
@@ -80,13 +87,27 @@ public class HomeController {
         return "redirect:/";
     }
 
+//    @PostMapping("/processPet")
+//    public String processMovie(@ModelAttribute Pet pet){
+//        petRepository.save(pet);
+//        return "redirect:/";
+//    }
+
     @PostMapping("/processPet")
-    public String processMovie(@ModelAttribute Pet pet){
-        petRepository.save(pet);
+    public String processPet(@ModelAttribute Pet pet, @RequestParam("file") MultipartFile file){
+        if(file.isEmpty()){
+            return "redirect:/addPet";
+        }
+        try{
+            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+            pet.setPhoto(uploadResult.get("url").toString());
+            petRepository.save(pet);
+        }catch (IOException e){
+            e.printStackTrace();
+            return "redirect:/addPet";
+        }
         return "redirect:/";
     }
-
-
 
 
 

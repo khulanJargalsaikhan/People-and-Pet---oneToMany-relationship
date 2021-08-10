@@ -7,15 +7,18 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<div class="container col-lg-3">
 
 
-<form th:action="@{/processPet}" th:object="${pet}" method="post">
+
+<form th:action="@{/processPet}" th:object="${pet}" method="post" enctype="multipart/form-data">
     <input type="hidden" th:field="*{id}">
     Name: <input type="text" th:field="*{name}"><br>
     Age: <input type="number" th:field="*{age}"><br>
+    <input type="file" name="file"><hr>
 
     <select th:field="*{owner}">
-<!--        director.id -g haraad director name -g display hiine-->
+<!--        owner.id -g haraad owner name -g display hiine-->
         <option th:each="owner: ${owners}" th:value="${owner.id}" th:text="${owner.name}"></option>
 
     </select>
@@ -25,6 +28,8 @@
 </form>
 
 
+
+</div>
 
 
 

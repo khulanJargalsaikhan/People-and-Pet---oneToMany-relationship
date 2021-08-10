@@ -10,6 +10,7 @@ public class Pet {
 
     private String name;
     private int age;
+    private String photo;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -39,6 +40,15 @@ public class Pet {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
 
     public Owner getOwner() {
         return owner;

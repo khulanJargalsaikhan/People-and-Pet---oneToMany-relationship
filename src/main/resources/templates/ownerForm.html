@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<div class="container col-lg-3">
+
 <form th:action="@{/processOwner}" th:object="${owner}" method="post">
     <input type="hidden" th:field="*{id}">
     <input type="hidden" th:field="*{pets}">
@@ -18,7 +20,7 @@
     <input type="submit" value="Submit">
 </form>
 
-
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
