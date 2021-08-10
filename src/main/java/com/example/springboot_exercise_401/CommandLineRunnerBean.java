@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class CommandLineRunnerBean implements CommandLineRunner {
 
@@ -12,6 +15,9 @@ public class CommandLineRunnerBean implements CommandLineRunner {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    DirectorRepository directorRepository;
 
     public void run(String...args){
         User user = new User("bart", "bart@domain.com", "bart", "Bart", "Simpson", true);
@@ -28,11 +34,41 @@ public class CommandLineRunnerBean implements CommandLineRunner {
         roleRepository.save(adminRole1);
         roleRepository.save(adminRole2);
 
+        // movies collection
+        Set<Movie> movies = new HashSet<Movie>();
 
 
+        // First let’s create a director
+        Director director = new Director();
+        director.setName("Stephen Bullock");
+        director.setGenre("Sci Fi");
 
+        // Now let’s create a movie
+        Movie movie = new Movie();
+        movie.setTitle("Star Movie");
+        movie.setYear(2017);
+        movie.setDescription("About Stars...");
+        movie.setDirector(director);
+        // Add the movie to an empty list
+        movies.add(movie);
+
+        // Now let’s create another movie
+        movie = new Movie();
+        movie.setTitle("DeathStar Ewoks");
+        movie.setYear(2011);
+        movie.setDescription("About Ewoks on the DeathStar...");
+        movie.setDirector(director);
+        movies.add(movie);
+
+        // Add the list of movies to the director’s movie list
+        director.setMovies(movies);
+
+        // Save the director to the database
+        directorRepository.save(director);
 
 
     }
+
+
 
 }
