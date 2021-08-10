@@ -17,7 +17,7 @@ public class CommandLineRunnerBean implements CommandLineRunner {
     RoleRepository roleRepository;
 
     @Autowired
-    DirectorRepository directorRepository;
+    OwnerRepository ownerRepository;
 
     public void run(String...args){
         User user = new User("bart", "bart@domain.com", "bart", "Bart", "Simpson", true);
@@ -34,37 +34,36 @@ public class CommandLineRunnerBean implements CommandLineRunner {
         roleRepository.save(adminRole1);
         roleRepository.save(adminRole2);
 
-        // movies collection
-        Set<Movie> movies = new HashSet<Movie>();
+        // pets collection
+        Set<Pet> pets = new HashSet<Pet>();
 
 
-        // First let’s create a director
-        Director director = new Director();
-        director.setName("Stephen Bullock");
-        director.setGenre("Sci Fi");
+        // First let’s create a owner
+        Owner owner = new Owner();
+        owner.setName("Stephen");
+        owner.setAddress("Arlington, VA-22202");
 
-        // Now let’s create a movie
-        Movie movie = new Movie();
-        movie.setTitle("Star Movie");
-        movie.setYear(2017);
-        movie.setDescription("About Stars...");
-        movie.setDirector(director);
-        // Add the movie to an empty list
-        movies.add(movie);
+        // Now let’s create a pet
+        Pet pet = new Pet();
+        pet.setName("Bella");
+        pet.setAge(2);
+        pet.setOwner(owner);
+        // Add the pet to an empty list
+        pets.add(pet);
 
-        // Now let’s create another movie
-        movie = new Movie();
-        movie.setTitle("DeathStar Ewoks");
-        movie.setYear(2011);
-        movie.setDescription("About Ewoks on the DeathStar...");
-        movie.setDirector(director);
-        movies.add(movie);
+        // Now let’s create another pet
+        pet = new Pet();
+        pet.setName("Angel");
+        pet.setAge(5);
+        pet.setOwner(owner);
+        // Add the pet to the list
+        pets.add(pet);
 
-        // Add the list of movies to the director’s movie list
-        director.setMovies(movies);
+        // Add the list of pets to the owner’s pet list
+        owner.setPets(pets);
 
-        // Save the director to the database
-        directorRepository.save(director);
+        // Save the owner to the database
+        ownerRepository.save(owner);
 
 
     }

@@ -8,19 +8,19 @@
 </head>
 <body>
 
-<h1>Director List</h1>
-<div th:each="director : ${directors}">
-    <h2 th:text="${director.name}"></h2>
+<h1>Owner List</h1>
+<div th:each="owner : ${owners}">
+    <h2 th:text="${owner.name}"></h2>
 
-    <a th:href="@{/updateDirector/{id}(id=${director.id})}">Update Director</a>
-    <a th:href="@{/deleteDirector/{id}(id=${director.id})}">Delete Director</a>
-    <h6 th:inline="text">specializing in [[${director.genre}]]</h6>
+    <a th:href="@{/updateOwner/{id}(id=${owner.id})}">Update Owner</a>
+    <a th:href="@{/deleteOwner/{id}(id=${owner.id})}">Delete Owner</a>
+    <h6 th:inline="text">Address in [[${owner.address}]]</h6>
     <ul>
-        <th:block th:each="movie : ${director.movies}">
-            <li th:inline="text"><b>[[${movie.title}]]</b> released in [[${movie.year}]].</li>
+        <th:block th:each="pet : ${owner.pets}">
+            <li th:inline="text"><b>Pet name: [[${pet.name}]]</b> age: [[${pet.age}]].</li>
 
-            <li><a th:href="@{/updateMovie/{id}(id=${movie.id})}">Update Movie</a></li>
-            <li><a th:href="@{/deleteMovie/{id}(id=${movie.id})}">Delete Movie</a></li>
+            <li><a th:href="@{/updatePet/{id}(id=${pet.id})}">Update Pet</a></li>
+            <li><a th:href="@{/deletePet/{id}(id=${pet.id})}">Delete pet</a></li>
         </th:block>
     </ul>
 </div>
@@ -29,8 +29,8 @@
 </form>
 
 
-<a th:href="@{/addDirector}">Add Director</a>
-<a th:href="@{/addMovie}">Add Movie</a>
+<a th:href="@{/addOwner}">Add Owner</a>
+<a th:href="@{/addPet}">Add Pet</a>
 
 
 

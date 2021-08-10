@@ -2,5 +2,5 @@ package com.example.springboot_exercise_401;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface DirectorRepository extends CrudRepository<Director, Long> {
+public interface PetRepository extends CrudRepository<Pet, Long> {
 }

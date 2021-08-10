@@ -20,71 +20,69 @@ public class HomeController {
     RoleRepository roleRepository;
 
     @Autowired
-    DirectorRepository directorRepository;
+    OwnerRepository ownerRepository;
 
     @Autowired
-    MovieRepository movieRepository;
+    PetRepository petRepository;
 
 
     @RequestMapping("/")
     public String homepage(Model model){
-
-    // Grab all the directors from the database and send them to
-    // the template
-        model.addAttribute("directors", directorRepository.findAll());
+        // Grab all the owners from the database and send them to the template
+        model.addAttribute("owners", ownerRepository.findAll());
         return "index";
     }
 
-    @GetMapping("/addDirector")
-    public String addDirector(Model model){
-        model.addAttribute("director", new Director());
-        return "directorForm";
+    @GetMapping("/addOwner")
+    public String addOwner(Model model){
+        model.addAttribute("owner", new Owner());
+        return "ownerForm";
     }
 
-    @RequestMapping("/updateDirector/{id}")
-    public String updateDirector(@PathVariable("id") long id, Model model){
-        model.addAttribute("director", directorRepository.findById(id).get());
-        return "directorForm";
+    @RequestMapping("/updateOwner/{id}")
+    public String updateOwner(@PathVariable("id") long id, Model model){
+        model.addAttribute("owner", ownerRepository.findById(id).get());
+        return "ownerForm";
     }
 
-    @RequestMapping("/deleteDirector/{id}")
-    public String deleteDirector(@PathVariable("id") long id){
-        directorRepository.deleteById(id);
+    @RequestMapping("/deleteOwner/{id}")
+    public String deleteOwner(@PathVariable("id") long id){
+        ownerRepository.deleteById(id);
         return "redirect:/";
     }
 
-    @PostMapping("/processDirector")
-    public String processDirector(@ModelAttribute Director director){
-        directorRepository.save(director);
+    @PostMapping("/processOwner")
+    public String processOwner(@ModelAttribute Owner owner){
+        ownerRepository.save(owner);
         return "redirect:/";
     }
 
 
 
-    @GetMapping("/addMovie")
-    public String addMovie(Model model){
-        model.addAttribute("movie", new Movie());
-        model.addAttribute("directors", directorRepository.findAll());
-        return "movieForm";
+    @GetMapping("/addPet")
+    public String addPet(Model model){
+        model.addAttribute("pet", new Pet());
+        model.addAttribute("owners", ownerRepository.findAll());
+        return "petForm";
     }
 
 
-    @RequestMapping("/updateMovie/{id}")
-    public String updateMovie(@PathVariable("id") long id, Model model){
-        model.addAttribute("movie", movieRepository.findById(id).get());
-        model.addAttribute("directors", directorRepository.findAll());
-        return "movieForm";
+    @RequestMapping("/updatePet/{id}")
+    public String updatePet(@PathVariable("id") long id, Model model){
+        model.addAttribute("pet", petRepository.findById(id).get());
+        model.addAttribute("owners", ownerRepository.findAll());
+        return "petForm";
     }
 
-    @RequestMapping("/deleteMovie/{id}")
-    public String deleteMovie(@PathVariable("id") long id){
-        movieRepository.deleteById(id);
+    @RequestMapping("/deletePet/{id}")
+    public String deletePet(@PathVariable("id") long id){
+        petRepository.deleteById(id);
         return "redirect:/";
     }
 
-    @PostMapping("/processMovie")
-    public String processMovie(@ModelAttribute Movie movie){
-        movieRepository.save(movie);
+    @PostMapping("/processPet")
+    public String processMovie(@ModelAttribute Pet pet){
+        petRepository.save(pet);
         return "redirect:/";
     }
 

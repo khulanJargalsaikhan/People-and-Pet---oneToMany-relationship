@@ -9,16 +9,14 @@
 <body>
 
 
-<form th:action="@{/processMovie}" th:object="${movie}" method="post">
+<form th:action="@{/processPet}" th:object="${pet}" method="post">
     <input type="hidden" th:field="*{id}">
-    Name: <input type="text" th:field="*{title}">
-    Year: <input type="number" th:field="*{year}">
-    Description: <input type="text" th:field="*{description}">
-    <br>
+    Name: <input type="text" th:field="*{name}"><br>
+    Age: <input type="number" th:field="*{age}"><br>
 
-    <select th:field="*{director}">
+    <select th:field="*{owner}">
 <!--        director.id -g haraad director name -g display hiine-->
-        <option th:each="director: ${directors}" th:value="${director.id}" th:text="${director.name}"></option>
+        <option th:each="owner: ${owners}" th:value="${owner.id}" th:text="${owner.name}"></option>
 
     </select>
     <br>
