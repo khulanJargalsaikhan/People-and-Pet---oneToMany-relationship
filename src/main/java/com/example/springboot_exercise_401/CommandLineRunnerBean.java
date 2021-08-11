@@ -52,12 +52,20 @@ public class CommandLineRunnerBean implements CommandLineRunner {
         pets.add(pet);
 
         // Now let’s create another pet
-        pet = new Pet();
-        pet.setName("Angel");
-        pet.setAge(5);
-        pet.setOwner(owner);
+        Pet pet2 = new Pet();
+        pet2.setName("Angel");
+        pet2.setAge(5);
+        pet2.setOwner(owner);
         // Add the pet to the list
-        pets.add(pet);
+        pets.add(pet2);
+
+        // Now let’s create another pet
+        Pet pet3 = new Pet();
+        pet3.setName("Jasper");
+        pet3.setAge(4);
+        pet3.setOwner(owner);
+        // Add the pet to the list
+        pets.add(pet3);
 
         // Add the list of pets to the owner’s pet list
         owner.setPets(pets);

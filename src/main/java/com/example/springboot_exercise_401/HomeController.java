@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -87,11 +89,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-//    @PostMapping("/processPet")
-//    public String processMovie(@ModelAttribute Pet pet){
-//        petRepository.save(pet);
-//        return "redirect:/";
-//    }
 
     @PostMapping("/processPet")
     public String processPet(@ModelAttribute Pet pet, @RequestParam("file") MultipartFile file){
@@ -108,6 +105,23 @@ public class HomeController {
         }
         return "redirect:/";
     }
+
+
+
+    @GetMapping("/searchPet")
+    public String searchPet(Model model){
+        return "searchPet";
+    }
+
+    @PostMapping("/searchPet")
+    public String searchPet(Model model, @RequestParam(name="name") String name){
+        ArrayList<Pet> results = (ArrayList<Pet>) petRepository.findAllByName(name);
+        model.addAttribute("results", results);
+        model.addAttribute("owners", ownerRepository.findAll());
+        return "result";
+    }
+
+
 
 
 
